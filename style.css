@@ -207,4 +207,21 @@ footer {
 }
 .k41-cascade .eddy-big { animation: eddyPulse 3.2s ease-in-out infinite; }
 
+/* --- Fix animación SVG (transform en elementos SVG) --- */
+.k41-cascade .eddy,
+.k41-cascade .eddy-big,
+.k41-cascade .eddy-mid,
+.k41-cascade .eddy-small {
+  transform-box: fill-box;
+  transform-origin: center;
+}
 
+/* (Opcional) si usas reduce motion del sistema y quieres que siga animando, comenta este bloque
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+*/
+
+/* (Recomendado) asegurar contraste del título en modo oscuro */
+.dark-mode header h1 { color: #f9fafb; }
+.dark-mode header p  { color: #d1d5db; }
