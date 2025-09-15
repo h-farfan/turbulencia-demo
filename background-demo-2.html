@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Nubes difusas</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom, #0f172a, #1e3a8a);
+      overflow: hidden;
+    }
+
+    /* Capa con gradientes radiales semitransparentes (nubes) */
+    .clouds {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 20% 40%, rgba(255,255,255,0.2) 0%, transparent 60%),
+                  radial-gradient(circle at 70% 30%, rgba(255,255,255,0.15) 0%, transparent 70%),
+                  radial-gradient(circle at 40% 80%, rgba(255,255,255,0.1) 0%, transparent 60%);
+      background-size: 200% 200%;
+      animation: moveClouds 60s linear infinite;
+      filter: blur(40px);
+    }
+
+    @keyframes moveClouds {
+      0%   { background-position: 0% 0%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 100%; }
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      top: 40%;
+      font-size: 3rem;
+      color: white;
+      text-shadow: 0 0 10px rgba(0,0,0,0.6);
+    }
+  </style>
+</head>
+<body>
+  <div class="clouds"></div>
+  <h1>🌫️ Fondo con nubes difuminadas</h1>
+</body>
+</html>

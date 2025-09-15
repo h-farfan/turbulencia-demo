@@ -24,6 +24,11 @@
   <meta name="twitter:description" content="Qué es la turbulencia atmosférica, por qué ocurre y cómo se percibe.">
   <meta name="twitter:image" content="https://h-farfan.github.io/turbulencia-demo/img/img1.png">
 
+  <script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: true });
+  </script>
+
 </head>
 <body>
   <!-- Fondo animado de nubes -->
@@ -43,36 +48,83 @@
       <!-- aquí luego puedes agregar más secciones -->
     </nav>
 
-    <p>Pequeñas variaciones caóticas en el movimiento del aire que percibimos como “sacudidas”.</p>
+    <p>-.</p>
     <button id="toggle-dark" aria-pressed="false" aria-label="Cambiar modo oscuro">
       🌙 Modo oscuro
     </button>
   </header>
 
-  <main>
-    <figure class="cloud-figure">
-      <img
-        src="img/img1.png"
-        alt="Formación de nubes cumulonimbus asociadas a corrientes ascendentes y descendentes" />
-      <figcaption>
-        Las corrientes verticales cerca de nubes de desarrollo vertical pueden generar turbulencia.
-      </figcaption>
-    </figure>
+<main>
+  <h2>Introducción</h2>
 
-    <h2>¿Por qué ocurre?</h2>
-    <p>
-      La turbulencia se produce cuando hay <strong>cizalladura del viento</strong>, gradientes de temperatura
-      o flujos alrededor de obstáculos (cordilleras, edificios). En aviación, es común la turbulencia en aire claro
-      (CAT) cerca de la <em>corriente en chorro</em> y la orográfica a sotavento de montañas.
-    </p>
+<figure class="wiki-style">
+  <img
+    src="img/img2B.png"
+    alt="Trayectoria recta de la luz en el espacio que se vuelve sinuosa al entrar en la atmósfera turbulenta"
+    loading="lazy" width="420" height="280" />
+  <figcaption>
+    En el espacio la luz viaja recta; en la atmósfera, la turbulencia la desvía.<br>
+    <small>Ilustración digital.</small>
+  </figcaption>
+</figure>
 
-    <h2>¿Es peligrosa?</h2>
-    <p>
-      Normalmente no. Los aviones están diseñados para soportarla; lo importante es llevar el cinturón abrochado.
-    </p>
+
+  <p style="text-align: justify;">
+    El estudio de la turbulencia atmosférica ha evolucionado a lo largo de más de un siglo mediante aportes fundamentales que han permitido pasar de una descripción experimental a un marco teórico y aplicado. Los primeros trabajos de Osborne Reynolds (1883) introdujeron el número de Reynolds y la descomposición de flujo en promedio y fluctuaciones, mientras que L. F. Richardson (1922) anticipó la idea de la cascada de energía en la mezcla turbulenta. Posteriormente, Ludwig Prandtl (1925) y Theodore von Kármán (1930s) desarrollaron la teoría de la longitud de mezcla y la ley logarítmica de la velocidad en la capa límite, sentando bases para la micrometeorología. En paralelo, G. I. Taylor (1935, 1938) aportó un enfoque estadístico con correlaciones espacio-temporales y su hipótesis de “congelación de turbulencia”, esenciales para la observación atmosférica. A. N. Kolmogórov (1941) formuló la teoría universal de la turbulencia homogénea e isótropa, extendida por A. M. Obukhov (1949) y, de manera independiente, por George Corrsin (1951), hacia los escalares pasivos como la temperatura, consolidando la hipótesis Corrsin–Obukhov. G. K. Batchelor (1953) complementó estas ideas al estudiar la difusión escalar, mientras que A. A. Townsend (1956, 1976) profundizó en la estructura de los flujos turbulentos de cizalla. La teoría se formalizó aún más con los trabajos de Robert Kraichnan (1960s) en modelos estadísticos y cierres, así como con los de John Lumley (1960s–1970s), que impulsaron la modelización de la turbulencia. En el ámbito atmosférico, la Teoría de Similaridad de Monin–Obukhov (1954) permitió describir la capa superficial incorporando los efectos de la estabilidad térmica y la fricción. Victor Tatarskii (1959, 1961) aplicó la teoría al estudio de la propagación de ondas en la atmósfera, un campo luego ampliado por L. A. Chernov (1960) y, más tarde, por Akira Ishimaru (1978) en el contexto electromagnético. La formalización estadística alcanzó un punto culminante con Andrei Yaglom y sus colaboraciones con Monin en Statistical Fluid Mechanics (1971, 1975), mientras que John Wyngaard (1970s–2000s) impulsó la micrometeorología observacional. Finalmente, en tiempos más recientes, autores como Larry Andrews y Ronald Phillips (1990s–2000s) en óptica atmosférica y Stephen B. Pope (2000) en la síntesis de flujos turbulentos han consolidado y sistematizado la disciplina. Esta evolución, que va desde las observaciones pioneras hasta las aplicaciones modernas en meteorología, comunicaciones y modelado numérico, constituye el marco teórico de referencia para comprender la turbulencia atmosférica y su impacto en la ciencia y la tecnología.
+  </p>
+
+
+
+    <h2>Mapa conceptual</h2>
+    <div class="mermaid">
+    graph TD
+    A[Reynolds 1883<br>Número de Reynolds] --> B[Richardson 1922<br>Cascada de energía]
+    B --> C[Prandtl & von Kármán<br>Longitud de mezcla, ley log]
+    C --> D[Taylor 1935–1938<br>Estadística, hipótesis de congelación]
+    D --> E[Kolmogórov 1941<br>Teoría universal]
+    E --> F[Obukhov & Corrsin<br>Escalares pasivos]
+    F --> G[Batchelor 1953<br>Difusión escalar]
+    F --> H[Monin–Obukhov 1954<br>Similaridad en la capa superficial]
+    E --> I[Tatarskii 1959<br>Propagación de ondas]
+    I --> J[Chernov 1960<br>Ondas en medios aleatorios]
+    J --> K[Ishimaru 1978<br>Óptica y electromagnetismo]
+    H --> L[Wyngaard 1970s–2000s<br>Micrometeorología]
+    E --> M[Townsend 1956–1976<br>Estructura de flujos]
+    M --> N[Kraichnan 1960s<br>Modelos estadísticos]
+    N --> O[Lumley 1960s–1970s<br>Cierres y modelización]
+    O --> P[Yaglom & Monin 1971–1975<br>Formalización estadística]
+    P --> Q[Pope 2000<br>Síntesis moderna]
+    K --> R[Andrews & Phillips 1990s–2000s<br>Óptica atmosférica]
+    </div>
+
+
+<h2>Referencias</h2>
+<ul>
+  <li>Andrews, L. C., & Phillips, R. L. (1998). <em>Laser beam propagation through random media</em>. SPIE Press.</li>
+  <li>Batchelor, G. K. (1953). <em>The theory of homogeneous turbulence</em>. Cambridge University Press.</li>
+  <li>Chernov, L. A. (1960). <em>Wave propagation in a random medium</em>. McGraw-Hill.</li>
+  <li>Corrsin, G. (1951). On the spectrum of isotropic temperature fluctuations in an isotropic turbulence. <em>Journal of Applied Physics</em>, 22(4), 469–473.</li>
+  <li>Ishimaru, A. (1978). <em>Wave propagation and scattering in random media</em> (Vols. 1–2). Academic Press.</li>
+  <li>Kolmogorov, A. N. (1941). The local structure of turbulence in incompressible viscous fluid for very large Reynolds numbers. <em>Doklady Akademii Nauk SSSR</em>, 30, 301–305.</li>
+  <li>Kraichnan, R. H. (1967). Inertial ranges in two-dimensional turbulence. <em>The Physics of Fluids</em>, 10(7), 1417–1423.</li>
+  <li>Lumley, J. L. (1970). <em>Stochastic tools in turbulence</em>. Academic Press.</li>
+  <li>Monin, A. S., & Obukhov, A. M. (1954). Basic laws of turbulent mixing in the ground layer of the atmosphere. <em>Trudy Geofizicheskogo Instituta AN SSSR</em>, 24(151), 163–187.</li>
+  <li>Monin, A. S., & Yaglom, A. M. (1971, 1975). <em>Statistical fluid mechanics: Mechanics of turbulence</em> (Vols. 1–2). MIT Press.</li>
+  <li>Obukhov, A. M. (1949). Structure of the temperature field in turbulent flow. <em>Izvestiya Akademii Nauk SSSR, Ser. Geografiya i Geofizika</em>, 13(1), 58–69.</li>
+  <li>Pope, S. B. (2000). <em>Turbulent flows</em>. Cambridge University Press.</li>
+  <li>Prandtl, L. (1925). Bericht über Untersuchungen zur ausgebildeten Turbulenz. <em>Zeitschrift für angewandte Mathematik und Mechanik</em>, 5(2), 136–139.</li>
+  <li>Reynolds, O. (1883). An experimental investigation of the circumstances which determine whether the motion of water shall be direct or sinuous, and of the law of resistance in parallel channels. <em>Philosophical Transactions of the Royal Society of London</em>, 174, 935–982.</li>
+  <li>Richardson, L. F. (1922). <em>Weather prediction by numerical process</em>. Cambridge University Press.</li>
+  <li>Tatarskii, V. I. (1961). <em>Wave propagation in a turbulent medium</em>. McGraw-Hill. (Trabajo original en ruso, 1959).</li>
+  <li>Taylor, G. I. (1935). Statistical theory of turbulence. <em>Proceedings of the Royal Society of London. Series A, Mathematical and Physical Sciences</em>, 151(873), 421–444.</li>
+  <li>Taylor, G. I. (1938). The spectrum of turbulence. <em>Proceedings of the Royal Society of London. Series A, Mathematical and Physical Sciences</em>, 164(919), 476–490.</li>
+  <li>Townsend, A. A. (1956). <em>The structure of turbulent shear flow</em>. Cambridge University Press.</li>
+  <li>von Kármán, T. (1930). Mechanische Ähnlichkeit und Turbulenz. <em>Nachrichten von der Gesellschaft der Wissenschaften zu Göttingen, Fachgruppe 1 (Mathematik)</em>, 5, 58–76.</li>
+  <li>Wyngaard, J. C. (2010). <em>Turbulence in the atmosphere</em>. Cambridge University Press.</li>
+</ul>
+
 
     <a href="K41.html" class="btn-link">Teoría K41</a>
-
   </main>
 
   <footer>

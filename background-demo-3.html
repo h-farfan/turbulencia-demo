@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demo con nubes animadas (difusas + rápidas)</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: system-ui, sans-serif;
+      line-height: 1.5;
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
+
+    /* Fondo de cielo */
+    #clouds {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      background: linear-gradient(to bottom, #c9dbe9 0%, #ffffff 100%);
+    }
+
+    /* Nubes: más difusas (blur alto) y “fluffy” con lóbulos */
+    .cloud {
+      position: absolute;
+      top: 40%;
+      left: -50vw; /* arranca bien fuera de pantalla a la izquierda */
+      width: 240px;
+      height: 80px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 999px;
+      filter: blur(18px); /* <-- más difuso */
+      box-shadow:
+        0 6px 40px rgba(0,0,0,.06),
+        inset 0 0 60px rgba(255,255,255,.75);
+    }
+    .cloud::before,
+    .cloud::after {
+      content: "";
+      position: absolute;
+      background: rgba(255,255,255,0.9);
+      border-radius: 999px;
+      filter: blur(18px); /* también difumino los lóbulos */
+    }
+    .cloud::before {
+      width: 130px; height: 100px;
+      top: -28px; left: 18px;
+      transform: rotate(25deg);
+    }
+    .cloud::after {
+      width: 160px; height: 160px;
+      top: -70px; right: 10px;
+    }
+
+    /* Recorren TODA la pantalla:
+       - left: -50vw (origen fuera de pantalla)
+       - se mueven +160vw (pasa de muy a la izquierda a más allá de la derecha) */
+    @keyframes moveClouds {
+      from { transform: translateX(0); }
+      to   { transform: translateX(160vw); }
+    }
+
+    /* Variantes: alturas, escalas, opacidades, VELOCIDADES (mitad del tiempo = doble de rápido) */
+    .x1 { top: 22%; transform: scale(1.0);  opacity: 0.85; animation: moveClouds 14s linear infinite; }
+    .x2 { top: 42%; transform: scale(0.85); opacity: 0.70; animation: moveClouds 18s linear infinite; }
+    .x3 { top: 58%; transform: scale(0.70); opacity: 0.65; animation: moveClouds 21s linear infinite; }
+    .x4 { top: 14%; transform: scale(0.95); opacity: 0.75; animation: moveClouds 16s linear infinite; }
+    .x5 { top: 76%; transform: scale(0.80); opacity: 0.70; animation: moveClouds 19s linear infinite; }
+
+    /* Contenido por encima del fondo */
+    header, main, footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    header h1 { font-size: 2rem; margin-bottom: 1rem; }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.85);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    footer { font-size: 0.9rem; color: #444; }
+
+    /* Respeta reducir animaciones del sistema */
+    @media (prefers-reduced-motion: reduce) {
+      .cloud { animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Fondo de nubes (difusas, atraviesan toda la pantalla, doble de rápido) -->
+  <div id="clouds" aria-hidden="true">
+    <div class="cloud x1"></div>
+    <div class="cloud x2"></div>
+    <div class="cloud x3"></div>
+    <div class="cloud x4"></div>
+    <div class="cloud x5"></div>
+  </div>
+
+  <!-- Contenido de prueba -->
+  <header>
+    <h1>Nubes difusas + recorrido completo + velocidad x2</h1>
+    <p>Ejemplo para usar como fondo animado</p>
+  </header>
+
+  <main>
+    <h2>¿Qué cambió?</h2>
+    <ul style="text-align:left; max-width: 560px; margin: 0 auto;">
+      <li><strong>Difuminado:</strong> blur elevado en la nube y sus lóbulos.</li>
+      <li><strong>Recorrido completo:</strong> originan en <code>left:-50vw</code> y se desplazan <code>160vw</code>.</li>
+      <li><strong>Velocidad:</strong> duraciones a la mitad (p. ej. 28s → 14s).</li>
+    </ul>
+  </main>
+
+  <footer>
+    <small>Demo visual · Creative Commons BY 2025</small>
+  </footer>
+</body>
+</html>

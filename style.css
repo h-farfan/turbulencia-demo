@@ -241,3 +241,55 @@ footer {
 .x3 { top: 55%; transform: scale(0.8); opacity: 0.7; animation: moveclouds 9.5s linear infinite; }
 .x4 { top: 70%; transform: scale(0.75);opacity: 0.75; animation: moveclouds 10.5s linear infinite; }
 .x5 { top: 45%; transform: scale(0.9); opacity: 0.65; animation: moveclouds 12s linear infinite; }
+
+.mermaid {
+  max-width: 100%;
+  margin: 1.5rem auto;
+}
+
+/* Intro antigua (puedes borrar si ya no usas intro-section) */
+.intro-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+.intro-text {
+  flex: 2;
+  text-align: justify;
+}
+.intro-figure {
+  flex: 1;
+  text-align: center;
+}
+.intro-figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Estilo tipo Wikipedia */
+.wiki-style {
+  float: right;
+  width: 320px; /* ajusta según necesites */
+  margin: 0 0 1rem 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+}
+.wiki-style img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  background: #fff;
+  padding: 2px;
+  border-radius: 2px;
+}
+
+/* Responsive: en móvil, sin float */
+@media (max-width: 800px) {
+  .wiki-style {
+    float: none;
+    width: 100%;
+    margin: 1rem 0;
+  }
+}
