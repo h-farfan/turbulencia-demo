@@ -137,23 +137,16 @@ footer {
 :focus-visible { outline: 2px solid #2563eb; outline-offset: 3px; }
 
 /* ===== DIAGRAMA K41 ===== */
-/* Contenedor responsivo */
 .k41-cascade { max-width: 900px; margin: 2rem auto; text-align: center; }
-/* El SVG hereda el color (claro/oscuro) */
 .k41-cascade svg { width: 100%; height: auto; color: inherit; }
-/* Etiquetas y ejes */
 .k41-label { font: 600 14px/1 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; fill: currentColor; opacity: .9; }
 .k41-axis  { stroke: currentColor; stroke-width: 2; opacity: .75; }
 .k41-axis-label { font: 500 13px/1 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; fill: currentColor; opacity: .9; }
-/* Vórtices */
 .eddy { fill: none; stroke: currentColor; stroke-width: 2; opacity: .85; }
 .eddy-big   { stroke-width: 3; }
 .eddy-mid   { stroke-dasharray: 6 4; opacity: .8; }
 .eddy-small { stroke-dasharray: 3 3; opacity: .8; }
-/* Disipación (puntos) */
 .heat circle { fill: currentColor; opacity: .65; }
-
-/* Fix: que los transforms funcionen en SVG */
 .k41-cascade .eddy,
 .k41-cascade .eddy-big,
 .k41-cascade .eddy-mid,
@@ -161,30 +154,18 @@ footer {
   transform-box: fill-box;
   transform-origin: center;
 }
-
-/* ==== ANIMACIONES ==== */
-/* Opción 1: “respirar” (escala) – desactivada por ahora */
 @keyframes eddyPulse {
   0%, 100% { transform: scale(1); opacity: .9; }
   50%      { transform: scale(1.03); opacity: 1; }
 }
 .k41-cascade .eddy-big { animation: eddyPulse 3.2s ease-in-out infinite; }
-
-
-/* Opción 2: “blink” (opacidad) – ACTIVADA */
 @keyframes eddyBlink {
   0%, 100% { opacity: .85; }
   50%      { opacity: 1; }
 }
 .k41-cascade .eddy-big { animation: eddyBlink 2.8s ease-in-out infinite; }
 
-/* (Opcional) Descomenta si quieres respetar reduce-motion del SO
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
-}
-*/
-
-/* ===== NUBES ANIMADAS DE FONDO (con velocidades diferentes) ===== */
+/* ===== NUBES ANIMADAS ===== */
 #clouds {
   position: fixed;
   top: 0;
@@ -195,7 +176,6 @@ footer {
   z-index: -1;
   background: linear-gradient(to bottom, #c9dbe9 0%, #ffffff 100%);
 }
-
 .cloud {
   width: 200px;
   height: 60px;
@@ -205,7 +185,6 @@ footer {
   top: 50%;
   filter: blur(8px);
 }
-
 .cloud::before,
 .cloud::after {
   content: '';
@@ -213,7 +192,6 @@ footer {
   background: rgba(255, 255, 255, 0.7);
   border-radius: 100px;
 }
-
 .cloud::before {
   width: 100px;
   height: 80px;
@@ -221,21 +199,16 @@ footer {
   left: 10px;
   transform: rotate(30deg);
 }
-
 .cloud::after {
   width: 120px;
   height: 120px;
   top: -55px;
   right: 15px;
 }
-
-/* Animación: atraviesan toda la pantalla */
 @keyframes moveclouds {
   0% { left: -300px; }
   100% { left: 110%; }
 }
-
-/* Cada nube tiene distinta duración y escala */
 .x1 { top: 20%; transform: scale(1);    opacity: 0.8; animation: moveclouds 8s linear infinite; }
 .x2 { top: 35%; transform: scale(0.6); opacity: 0.6; animation: moveclouds 11s linear infinite; }
 .x3 { top: 55%; transform: scale(0.8); opacity: 0.7; animation: moveclouds 9.5s linear infinite; }
@@ -247,28 +220,13 @@ footer {
   margin: 1.5rem auto;
 }
 
-/* Intro antigua (puedes borrar si ya no usas intro-section) */
-.intro-section {
-  display: flex;
-  align-items: flex-start;
-  gap: 2rem;
-  margin: 2rem 0;
-}
-.intro-text {
-  flex: 2;
-  text-align: justify;
-}
-.intro-figure {
-  flex: 1;
-  text-align: center;
-}
-.intro-figure img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
+/* ===== FIGURA INTRO ANTIGUA (puedes borrar si no la usas) ===== */
+.intro-section { display: flex; align-items: flex-start; gap: 2rem; margin: 2rem 0; }
+.intro-text { flex: 2; text-align: justify; }
+.intro-figure { flex: 1; text-align: center; }
+.intro-figure img { max-width: 100%; height: auto; border-radius: 8px; }
 
-/* Estilo tipo Wikipedia */
+/* ===== FIGURA ESTILO WIKIPEDIA ===== */
 .wiki-style {
   float: right;
   width: 320px; /* ajusta según necesites */
@@ -282,10 +240,8 @@ footer {
   border: 1px solid #ccc;
   background: #fff;
   padding: 2px;
-  border-radius: 2px;
+  border-radius: 2px; /* override al global */
 }
-
-/* Responsive: en móvil, sin float */
 @media (max-width: 800px) {
   .wiki-style {
     float: none;
@@ -293,3 +249,5 @@ footer {
     margin: 1rem 0;
   }
 }
+
+.intro-justify { text-align: justify; }
