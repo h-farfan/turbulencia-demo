@@ -17,9 +17,7 @@ header {
   border-bottom: 1px solid #e5e7eb;
 }
 
-h1 {
-  margin: 0 0 .5rem;
-}
+h1 { margin: 0 0 .5rem; }
 
 .pill {
   display: inline-block;
@@ -37,9 +35,7 @@ main {
   padding: 2rem 1rem;
 }
 
-figure {
-  margin: 0;
-}
+figure { margin: 0; }
 
 img {
   width: 100%;
@@ -60,35 +56,26 @@ h2:hover {
 }
 
 /* Enlaces */
-a {
-  color: #2563eb;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
+a { color: #2563eb; text-decoration: none; }
+a:hover { text-decoration: underline; }
 
 /* ===== FIGURA DE NUBE ===== */
 .cloud-figure {
-  max-width: 600px;         
-  margin: 2rem auto;        
-  text-align: center;       
-  background: #f9f9f9;      
+  max-width: 600px;
+  margin: 2rem auto;
+  text-align: center;
+  background: #f9f9f9;
   padding: 1rem;
-  border-radius: 12px;      
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .cloud-figure img {
-  width: 100%;              
-  border-radius: 8px;       
+  width: 100%;
+  border-radius: 8px;
   transition: transform 0.3s ease;
 }
-
-.cloud-figure img:hover {
-  transform: scale(1.03);   
-}
+.cloud-figure img:hover { transform: scale(1.03); }
 
 .cloud-figure figcaption {
   margin-top: 0.8rem;
@@ -106,45 +93,30 @@ footer {
   font-size: 0.85rem;
 }
 
-.dark-mode {
-  background: #1a1a1a;
-  color: #f8fafc;
-}
+/* ===== MODO OSCURO ===== */
+.dark-mode { background: #1a1a1a; color: #f8fafc; }
+.dark-mode header { background: #111827; color: #f9fafb; }
+.dark-mode footer { background: #111827; color: #d1d5db; }
+.dark-mode .cloud-figure { background: #1f2937; color: #f3f4f6; }
+.dark-mode .cloud-figure figcaption { color: #d1d5db; }
 
-.dark-mode header {
-  background: #111827;
-  color: #f9fafb;
-}
+/* Contraste del header en oscuro */
+.dark-mode header h1 { color: #f9fafb; }
+.dark-mode header p  { color: #d1d5db; }
 
-.dark-mode footer {
-  background: #111827;
-  color: #d1d5db;
-}
-
-.dark-mode .cloud-figure {
-  background: #1f2937;
-  color: #f3f4f6;
-}
-
-.dark-mode .cloud-figure figcaption {
-  color: #d1d5db;
-}
-
+/* ===== BOTONES / NAV ===== */
 .btn-link {
   display: inline-block;
   margin: 1rem 0;
   padding: 0.5rem 1rem;
   background: #2563eb;
-  color: white;
+  color: #fff;
   border-radius: 6px;
   text-decoration: none;
   font-weight: 500;
   transition: background 0.3s ease;
 }
-
-.btn-link:hover {
-  background: #1e40af;
-}
+.btn-link:hover { background: #1e40af; }
 
 .site-nav {
   display: flex;
@@ -152,7 +124,6 @@ footer {
   justify-content: center;
   margin-top: 1rem;
 }
-
 .site-nav a {
   text-decoration: none;
   font-weight: 500;
@@ -161,53 +132,28 @@ footer {
   border-radius: 6px;
   transition: background 0.3s ease, color 0.3s ease;
 }
+.site-nav a:hover { background: #2563eb; color: #fff; }
 
-.site-nav a:hover {
-  background: #2563eb;
-  color: white;
-}
+:focus-visible { outline: 2px solid #2563eb; outline-offset: 3px; }
 
-:focus-visible {
-  outline: 2px solid #2563eb;
-  outline-offset: 3px;
-}
-
+/* ===== DIAGRAMA K41 ===== */
 /* Contenedor responsivo */
-.k41-cascade {
-  max-width: 900px;
-  margin: 2rem auto;
-  text-align: center;
-}
-
-/* Tipografía dentro del SVG usa el color actual (modo claro/oscuro) */
-.k41-cascade svg {
-  width: 100%;
-  height: auto;
-  color: inherit;
-}
-
+.k41-cascade { max-width: 900px; margin: 2rem auto; text-align: center; }
+/* El SVG hereda el color (claro/oscuro) */
+.k41-cascade svg { width: 100%; height: auto; color: inherit; }
 /* Etiquetas y ejes */
 .k41-label { font: 600 14px/1 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; fill: currentColor; opacity: .9; }
-.k41-axis { stroke: currentColor; stroke-width: 2; opacity: .75; }
+.k41-axis  { stroke: currentColor; stroke-width: 2; opacity: .75; }
 .k41-axis-label { font: 500 13px/1 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; fill: currentColor; opacity: .9; }
-
 /* Vórtices */
 .eddy { fill: none; stroke: currentColor; stroke-width: 2; opacity: .85; }
 .eddy-big   { stroke-width: 3; }
 .eddy-mid   { stroke-dasharray: 6 4; opacity: .8; }
 .eddy-small { stroke-dasharray: 3 3; opacity: .8; }
-
-/* Disipación (pequeños puntos a la derecha) */
+/* Disipación (puntos) */
 .heat circle { fill: currentColor; opacity: .65; }
 
-/* Micro-animación sutil (opcional) */
-@keyframes eddyPulse {
-  0%, 100% { transform: scale(1); opacity: .9; }
-  50%      { transform: scale(1.03); opacity: 1; }
-}
-.k41-cascade .eddy-big { animation: eddyPulse 3.2s ease-in-out infinite; }
-
-/* --- Fix animación SVG (transform en elementos SVG) --- */
+/* Fix: que los transforms funcionen en SVG */
 .k41-cascade .eddy,
 .k41-cascade .eddy-big,
 .k41-cascade .eddy-mid,
@@ -216,12 +162,82 @@ footer {
   transform-origin: center;
 }
 
-/* (Opcional) si usas reduce motion del sistema y quieres que siga animando, comenta este bloque
+/* ==== ANIMACIONES ==== */
+/* Opción 1: “respirar” (escala) – desactivada por ahora */
+@keyframes eddyPulse {
+  0%, 100% { transform: scale(1); opacity: .9; }
+  50%      { transform: scale(1.03); opacity: 1; }
+}
+.k41-cascade .eddy-big { animation: eddyPulse 3.2s ease-in-out infinite; }
+
+
+/* Opción 2: “blink” (opacidad) – ACTIVADA */
+@keyframes eddyBlink {
+  0%, 100% { opacity: .85; }
+  50%      { opacity: 1; }
+}
+.k41-cascade .eddy-big { animation: eddyBlink 2.8s ease-in-out infinite; }
+
+/* (Opcional) Descomenta si quieres respetar reduce-motion del SO
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
 */
 
-/* (Recomendado) asegurar contraste del título en modo oscuro */
-.dark-mode header h1 { color: #f9fafb; }
-.dark-mode header p  { color: #d1d5db; }
+/* ===== NUBES ANIMADAS DE FONDO (con velocidades diferentes) ===== */
+#clouds {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+  background: linear-gradient(to bottom, #c9dbe9 0%, #ffffff 100%);
+}
+
+.cloud {
+  width: 200px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 200px;
+  position: absolute;
+  top: 50%;
+  filter: blur(8px);
+}
+
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 100px;
+}
+
+.cloud::before {
+  width: 100px;
+  height: 80px;
+  top: -15px;
+  left: 10px;
+  transform: rotate(30deg);
+}
+
+.cloud::after {
+  width: 120px;
+  height: 120px;
+  top: -55px;
+  right: 15px;
+}
+
+/* Animación: atraviesan toda la pantalla */
+@keyframes moveclouds {
+  0% { left: -300px; }
+  100% { left: 110%; }
+}
+
+/* Cada nube tiene distinta duración y escala */
+.x1 { top: 20%; transform: scale(1);    opacity: 0.8; animation: moveclouds 8s linear infinite; }
+.x2 { top: 35%; transform: scale(0.6); opacity: 0.6; animation: moveclouds 11s linear infinite; }
+.x3 { top: 55%; transform: scale(0.8); opacity: 0.7; animation: moveclouds 9.5s linear infinite; }
+.x4 { top: 70%; transform: scale(0.75);opacity: 0.75; animation: moveclouds 10.5s linear infinite; }
+.x5 { top: 45%; transform: scale(0.9); opacity: 0.65; animation: moveclouds 12s linear infinite; }
