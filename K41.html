@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Turbulencia atmosférica según Kolmogorov (K41)</title>
   <link rel="stylesheet" href="style.css">
+  <!-- MathJax para ecuaciones en LaTeX -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
   <header>
@@ -13,29 +15,71 @@
 
   <main>
     <p>
-      La <strong>teoría K41</strong> de Kolmogorov (1941) describe la turbulencia como un fenómeno en el que 
-      la energía cinética fluye desde las grandes escalas —donde el flujo es inyectado por gradientes o 
-      inestabilidades— hacia escalas cada vez más pequeñas, en un proceso llamado <em>cascada de energía</em>.
+      La <strong>teoría de Kolmogorov (K41)</strong> describe la turbulencia como un proceso
+      jerárquico de <em>cascada de energía</em>, donde la energía se inyecta en las grandes escalas
+      (<code>L₀</code>) y se transfiere hacia escalas cada vez más pequeñas hasta disiparse en calor
+      en la escala de Kolmogorov (<code>ℓ₀</code>).
+    </p>
+
+    <h2>Cascada de energía de Richardson</h2>
+    <p>
+      En la cascada, distinguimos tres etapas:
+      <ul>
+        <li><strong>Escala de inyección</strong> (<code>L₀</code>): la energía entra al sistema.</li>
+        <li><strong>Intervalo inercial</strong>: transferencia autosimilar sin disipación significativa.</li>
+        <li><strong>Escala de disipación</strong> (<code>ℓ₀</code>): la energía se convierte en calor por viscosidad.</li>
+      </ul>
+      En el intervalo inercial se cumple que \( \ell_0 \ll R \ll L_0 \), y la transferencia de energía se
+      caracteriza por la tasa de disipación \( \varepsilon \).
+    </p>
+
+    <h2>Funciones de estructura</h2>
+    <p>
+      La función de estructura de segundo orden para las velocidades es:
+    </p>
+    <p>
+      \[
+      D_{RR}(R) = \langle [V(x+R) - V(x)]^2 \rangle =
+      \begin{cases}
+        C_v^2 R^{2/3}, & \ell_0 \ll R \ll L_0 \\
+        C_v^2 \, \ell_0^{-4/3} R^2, & R \ll \ell_0
+      \end{cases}
+      \]
     </p>
 
     <p>
-      En esta teoría, se postula que en el rango inercial las pequeñas estructuras turbulentas son 
-      <strong>universales y estadísticamente homogéneas</strong>, es decir, su comportamiento no depende 
-      de los detalles del flujo, sino únicamente de la tasa de disipación de energía por unidad de masa, 
-      denotada por <code>ε</code>.
+      donde \( C_v^2 \) está relacionado con la tasa de disipación:
+      \[
+      C_v^2 = 2 \, \varepsilon^{2/3}.
+      \]
     </p>
 
+    <h2>Espectro de energía</h2>
     <p>
-      Una de las predicciones más famosas de K41 es la llamada <em>ley de los -5/3</em>: el espectro de 
-      energía turbulenta <code>E(k)</code> escala como <code>k<sup>-5/3</sup></code> en el rango inercial, 
-      donde <code>k</code> es el número de onda. Esto refleja cómo la energía se distribuye entre las 
-      diferentes escalas.
+      El espectro tridimensional de velocidades en el rango inercial sigue la famosa
+      <strong>ley de los -5/3</strong>:
+    </p>
+    <p>
+      \[
+      \Phi_v(\kappa) = 0.033 \, C_v^2 \, \kappa^{-11/3}, \quad
+      \frac{1}{L_0} \ll \kappa \ll \frac{1}{\ell_0}
+      \]
+    </p>
+    <p>
+      donde \( \kappa \) es el número de onda espacial.
     </p>
 
+    <h2>Extensión a escalares pasivos</h2>
     <p>
-      Aunque la teoría K41 es una idealización (pues supone homogeneidad, isotropía e incompresibilidad), 
-      sigue siendo la base para gran parte del estudio moderno de la turbulencia atmosférica y de fluidos 
-      en general.
+      Las fluctuaciones de temperatura y del índice de refracción se comportan de manera
+      análoga:
+    </p>
+    <p>
+      \[
+      D_T(R) \sim C_T^2 R^{2/3}, \quad
+      D_n(R) \sim C_n^2 R^{2/3},
+      \]
+      con espectros también proporcionales a \( \kappa^{-11/3} \).
     </p>
 
     <!-- Botón para volver -->
