@@ -105,3 +105,27 @@ footer {
   background: #f1f5f9;
   font-size: 0.85rem;
 }
+
+.dark-mode {
+  background: #1a1a1a;
+  color: #f8fafc;
+}
+
+.dark-mode header {
+  background: #111827;
+  color: #f9fafb;
+}
+
+.dark-mode footer {
+  background: #111827;
+  color: #d1d5db;
+}
+
+.dark-mode .cloud-figure {
+  background: #1f2937;
+  color: #f3f4f6;
+}
+
+.dark-mode .cloud-figure figcaption {
+  color: #d1d5db;
+}
