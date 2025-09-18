@@ -1,0 +1,73 @@
+:root{
+  --blue:#7ec4e6;
+  --brown:#8a6b3e;
+  --violet:#6b57a1;
+  --orange:#e5812a;
+  --green:#5aa33a;
+  --red:#cc2b1d;
+  --ink:#18181b;
+  --arrow:#2547cc;
+  --radius:12px;
+}
+
+/* la regla estaba mal anidada en :root antes */
+.blue-dark { fill:#245b8a; }
+
+html,body{
+  height:100%;
+  margin:0;
+  background:#fff;
+  color:var(--ink);
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial
+}
+.wrap{max-width:1100px;margin:auto;padding:16px}
+svg{width:100%;height:auto;display:block;border:2px solid #000;border-radius:var(--radius)}
+
+/* Texto en SVG */
+.t-lg{ font:700 28px/1.2 ui-sans-serif,system-ui; }
+.t-md{ font:700 18px/1.2 ui-sans-serif,system-ui; }
+.t-sm{ font:600 15px/1.2 ui-sans-serif,system-ui; }
+
+.green{ fill:var(--green); }
+.blue{ fill:var(--blue); }
+.red{ fill:var(--red); }
+
+.dashed{ stroke-dasharray:10 10; }
+
+rect.tag{ fill:rgba(128,128,128,0.4); stroke:#8ecaff; stroke-width:2; rx:10; ry:10; }
+
+/* Animación de remolinos (rotación continua) */
+.swirl{
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-name: spin;           /* <- rotación continua */
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: var(--d, 6s);
+  animation-play-state: var(--play, running);
+}
+@keyframes spin{ from{ transform: rotate(0deg) } to{ transform: rotate(360deg) } }
+
+/* Respeta preferencias de reducción de movimiento */
+@media (prefers-reduced-motion: reduce){ .swirl{ animation:none } }
+
+/* Flecha contorneada grande (inyección/disipación) */
+.bigArrow{ stroke:var(--arrow); stroke-width:7; fill:none; stroke-linecap:round; stroke-linejoin:round; filter: drop-shadow(0 1px 0 rgba(0,0,0,.08)) }
+.bigArrowLabel{ fill:var(--arrow); font:700 16px/1 ui-sans-serif,system-ui }
+
+/* Flechas internas */
+.cascadeArrow{ stroke:#5b4b8a }
+.subArrow{ stroke:#cf5682 }
+.fallArrow{ stroke:#a4752b }
+
+/* Barra de controles */
+.toolbar{
+  display:flex; gap:12px; align-items:center; flex-wrap:wrap;
+  border:1px solid #e6e6e7; border-radius:var(--radius); padding:10px 12px; margin-bottom:12px;
+  background:linear-gradient(180deg,#fafafc,#f5f7ff);
+}
+.btn{ appearance:none; border:1px solid #d0d4ff; background:#eef2ff; color:#1f2a7a; font-weight:700; padding:8px 12px; border-radius:999px; cursor:pointer }
+.btn[aria-pressed="true"]{ background:#dfe6ff }
+.range{ display:flex; align-items:center; gap:8px }
+.range input{ width:200px }
+.hint{ font-size:12px; opacity:.7 }

@@ -1,32 +1,131 @@
-:root {
+/* ============== */
+/* TOKENS + THEME */
+/* ============== */
+
+/* Día (por defecto) */
+:root{
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   line-height: 1.5;
+
+  --bg: #f8fafc;
+  --text: #1a1a1a;
+
+  --header-bg: linear-gradient(180deg, #eef2ff, #ffffff);
+  --footer-bg: #f1f5f9;
+
+  --muted: #555;
+  --muted-2: #666;
+  --primary: #2563eb;
+  --primary-strong: #1e40af;
+  --accent: #3730a3;
+
+  --card-bg: #f9f9f9;
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(229, 231, 235, 0.4);
+  --glass-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+
+  --border: #e5e7eb;
+
+  /* Nubes (cielo día) */
+  --clouds-top: #c9dbe9;
+  --clouds-bottom: #ffffff;
+  --cloud-color: rgba(255, 255, 255, 0.7);
+
+  /* Sidebar */
+  --sidebar-bg: #f8fafc;
+  --sidebar-border: #e5e7eb;
+
+  /* TOC activo */
+  --toc-text: #1f2937;
+  --toc-active: #4f46e5;
+
+  /* Botón */
+  --btn-bg: #2563eb;
+  --btn-bg-hover: #1e40af;
+  --btn-text: #ffffff;
 }
+
+/* Noche */
+.dark-mode{
+  --bg: #1a1a1a;
+  --text: #f8fafc;
+
+  --header-bg: #111827;
+  --footer-bg: #111827;
+
+  --muted: #d1d5db;
+  --muted-2: #d1d5db;
+  --primary: #93c5fd;
+  --primary-strong: #93c5fd; /* hover no cambia mucho en oscuro, puedes ajustar */
+  --accent: #a5b4fc;
+
+  --card-bg: #1f2937;
+  --glass-bg: rgba(17, 24, 39, 0.5);
+  --glass-border: rgba(55, 65, 81, 0.7);
+  --glass-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+
+  --border: #374151;
+
+  --clouds-top: #000000;
+  --clouds-bottom: #111827;
+  --cloud-color: rgba(255, 255, 255, 0.15);
+
+  --sidebar-bg: #0b1220;
+  --sidebar-border: #374151;
+
+  --toc-text: #e5e7eb;
+  --toc-active: #93c5fd;
+
+  --btn-bg: #2563eb;      /* puedes usar otro en oscuro si quieres */
+  --btn-bg-hover: #1e40af;
+  --btn-text: #ffffff;
+}
+
+/* Transición suave SOLO durante el cambio de tema */
+html.is-theming *, html.is-theming *::before, html.is-theming *::after{
+  transition:
+    background-color .28s ease,
+    color .28s ease,
+    border-color .28s ease,
+    fill .28s ease,
+    stroke .28s ease,
+    box-shadow .28s ease;
+}
+
+@media (prefers-reduced-motion: reduce){
+  html.is-theming *, html.is-theming *::before, html.is-theming *::after{
+    transition: none !important;
+  }
+}
+
+/* ===== BASE ===== */
 
 body {
   margin: 0;
-  color: #1a1a1a;
-  background: #f8fafc;
+  color: var(--text);
+  background: var(--bg);
 }
+
+h1 { margin: 0 0 .5rem; }
 
 /* ===== HEADER ===== */
 header {
   padding: 2rem 1rem;
   text-align: center;
-  background: linear-gradient(180deg, #eef2ff, #ffffff);
-  border-bottom: 1px solid #e5e7eb;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border);
 }
-
-h1 { margin: 0 0 .5rem; }
 
 .pill {
   display: inline-block;
-  background: #eef2ff;
-  color: #3730a3;
+  background: #eef2ff; /* puedes pasarlo a token si quieres */
+  color: var(--accent);
   padding: .25rem .5rem;
   border-radius: 999px;
   font-size: .8rem;
 }
+
+/* Contraste del header en oscuro: ya lo maneja var(--text) / tokens */
 
 /* ===== MAIN ===== */
 main {
@@ -45,18 +144,18 @@ img {
 
 figcaption {
   font-size: .9rem;
-  color: #555;
+  color: var(--muted);
   margin-top: .5rem;
 }
 
 /* Hover en títulos */
 h2:hover {
-  color: #3730a3;
+  color: var(--accent);
   transition: color 0.3s ease;
 }
 
 /* Enlaces */
-a { color: #2563eb; text-decoration: none; }
+a { color: var(--primary); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 /* ===== FIGURA DE NUBE ===== */
@@ -64,10 +163,11 @@ a:hover { text-decoration: underline; }
   max-width: 600px;
   margin: 2rem auto;
   text-align: center;
-  background: #f9f9f9;
+  background: var(--card-bg);
   padding: 1rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: var(--glass-shadow);
+  border: 1px solid var(--border);
 }
 
 .cloud-figure img {
@@ -80,7 +180,7 @@ a:hover { text-decoration: underline; }
 .cloud-figure figcaption {
   margin-top: 0.8rem;
   font-size: 0.95rem;
-  color: #555;
+  color: var(--muted);
   font-style: italic;
 }
 
@@ -88,35 +188,24 @@ a:hover { text-decoration: underline; }
 footer {
   text-align: center;
   padding: 2rem 1rem;
-  color: #666;
-  background: #f1f5f9;
+  color: var(--muted-2);
+  background: var(--footer-bg);
   font-size: 0.85rem;
 }
-
-/* ===== MODO OSCURO ===== */
-.dark-mode { background: #1a1a1a; color: #f8fafc; }
-.dark-mode header { background: #111827; color: #f9fafb; }
-.dark-mode footer { background: #111827; color: #d1d5db; }
-.dark-mode .cloud-figure { background: #1f2937; color: #f3f4f6; }
-.dark-mode .cloud-figure figcaption { color: #d1d5db; }
-
-/* Contraste del header en oscuro */
-.dark-mode header h1 { color: #f9fafb; }
-.dark-mode header p  { color: #d1d5db; }
 
 /* ===== BOTONES / NAV ===== */
 .btn-link {
   display: inline-block;
   margin: 1rem 0;
   padding: 0.5rem 1rem;
-  background: #2563eb;
-  color: #fff;
+  background: var(--btn-bg);
+  color: var(--btn-text);
   border-radius: 6px;
   text-decoration: none;
   font-weight: 500;
   transition: background 0.3s ease;
 }
-.btn-link:hover { background: #1e40af; }
+.btn-link:hover { background: var(--btn-bg-hover); }
 
 .site-nav {
   display: flex;
@@ -127,14 +216,14 @@ footer {
 .site-nav a {
   text-decoration: none;
   font-weight: 500;
-  color: #2563eb;
+  color: var(--primary);
   padding: 0.25rem 0.5rem;
   border-radius: 6px;
   transition: background 0.3s ease, color 0.3s ease;
 }
-.site-nav a:hover { background: #2563eb; color: #fff; }
+.site-nav a:hover { background: var(--primary); color: #fff; }
 
-:focus-visible { outline: 2px solid #2563eb; outline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
 
 /* ===== DIAGRAMA K41 ===== */
 .k41-cascade { max-width: 900px; margin: 2rem auto; text-align: center; }
@@ -174,26 +263,14 @@ footer {
   height: 100%;
   overflow: hidden;
   z-index: -1;
-  background: linear-gradient(to bottom, #c9dbe9 0%, #ffffff 100%);
-}
-/* Fondo de nubes en modo oscuro - estilo espacio */
-.dark-mode #clouds {
-  background: linear-gradient(to bottom, #000000 0%, #111827 100%);
-}
-/* Nubes en modo oscuro */
-.dark-mode .cloud {
-  background: rgba(255, 255, 255, 0.15); /* gris muy tenue */
+  background: linear-gradient(to bottom, var(--clouds-top) 0%, var(--clouds-bottom) 100%);
 }
 
-.dark-mode .cloud::before,
-.dark-mode .cloud::after {
-  background: rgba(255, 255, 255, 0.15);
-}
-
+/* Nubes (cuerpo) */
 .cloud {
   width: 200px;
   height: 60px;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--cloud-color);
   border-radius: 200px;
   position: absolute;
   top: 50%;
@@ -203,7 +280,7 @@ footer {
 .cloud::after {
   content: '';
   position: absolute;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--cloud-color);
   border-radius: 100px;
 }
 .cloud::before {
@@ -229,6 +306,33 @@ footer {
 .x4 { top: 70%; transform: scale(0.75);opacity: 0.75; animation: moveclouds 10.5s linear infinite; }
 .x5 { top: 45%; transform: scale(0.9); opacity: 0.65; animation: moveclouds 12s linear infinite; }
 
+/* Estrellas en modo oscuro */
+.dark-mode #clouds::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px; height: 2px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: 
+    50px 100px white,
+    120px 200px white,
+    300px 80px white,
+    600px 150px white,
+    700px 250px white,
+    900px 100px white,
+    1100px 200px white,
+    400px 300px white,
+    800px 400px white,
+    100px 500px white;
+  animation: twinkle 3s infinite alternate;
+  z-index: -2; /* detrás de las nubes */
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
 /* =========================
    MERMAID – CONTENEDOR + CARD
    ========================= */
@@ -239,12 +343,12 @@ footer {
 
 /* Tarjeta visual (“glass”) alrededor del diagrama */
 .mermaid-card {
-  background: rgba(255, 255, 255, 0.25);     /* antes 0.6 → más transparente */
-  border: 1px solid rgba(229, 231, 235, 0.4); /* más ligero */
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   border-radius: 12px;
   padding: 1rem;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05); /* sombra más sutil */
-  backdrop-filter: blur(10px);               /* más blur para efecto “glass” */
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(10px);
   overflow-x: auto;
   margin: 1.25rem 0;
 }
@@ -255,20 +359,11 @@ footer {
   stroke: none !important;
 }
 
-/* Dark mode para la tarjeta (no tocamos el SVG, ya es transparente) */
-.dark-mode .mermaid-card {
-  background: rgba(17, 24, 39, 0.5);
-  border-color: rgba(55, 65, 81, 0.7);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(6px);
-}
-
-/* Si aun así quieres una lámina oscura detrás del SVG, descomenta:
+/* (Si quieres una lámina oscura detrás del SVG en oscuro, descomenta)
 .dark-mode .mermaid svg > rect {
   fill: rgba(17, 24, 39, 0.6) !important;
 }
 */
-
 
 /* =========================
    FIGURA ESTILO WIKIPEDIA
@@ -283,8 +378,8 @@ footer {
 .wiki-style img {
   max-width: 100%;
   height: auto;
-  border: 1px solid #ccc;
-  background: #fff;
+  border: 1px solid #ccc;       /* si prefieres, usa var(--border) */
+  background: #fff;             /* o var(--bg) */
   padding: 2px;
   border-radius: 2px;           /* override al global */
 }
@@ -301,7 +396,6 @@ footer {
 /* Utilidad para justificar el párrafo de introducción */
 .intro-justify { text-align: justify; }
 
-
 /* =========================
    (Opcional) Layout anterior
    – SOLO si lo sigues usando
@@ -311,34 +405,185 @@ footer {
 .intro-figure { flex: 1; text-align: center; }
 .intro-figure img { max-width: 100%; height: auto; border-radius: 8px; }
 
-/* ===== ESTRELLAS QUIETAS CON CENTELLEO ===== */
-.dark-mode #clouds::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 2px;
-  height: 2px;
-  background: transparent;
-  border-radius: 50%;
-  /* Estrellas generadas con box-shadow en distintas posiciones */
-  box-shadow: 
-    50px 100px white,
-    120px 200px white,
-    300px 80px white,
-    600px 150px white,
-    700px 250px white,
-    900px 100px white,
-    1100px 200px white,
-    400px 300px white,
-    800px 400px white,
-    100px 500px white;
-  animation: twinkle 3s infinite alternate;
-  z-index: -2; /* detrás de las nubes */
+/* ============== */
+/* SIDEBAR / TOC  */
+/* ============== */
+
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
 }
 
-/* Parpadeo suave */
-@keyframes twinkle {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+/* Sidebar tipo Wikipedia */
+.sidebar {
+  position: sticky;
+  top: 1rem;
+  align-self: start;
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+  padding: 12px 12px 16px;
+  border: 1px solid var(--sidebar-border);
+  background: var(--sidebar-bg);
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* Botón para móviles/colapsar */
+.sidebar-toggle {
+  display: none;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  font-weight: 600;
+  padding: 4px 2px 8px;
+  cursor: pointer;
+}
+
+/* Lista del índice */
+.toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.toc li {
+  margin: 6px 0;
+  line-height: 1.3;
+}
+.toc a {
+  text-decoration: none;
+  color: var(--toc-text);
+  border-left: 3px solid transparent;
+  padding-left: 8px;
+}
+.toc a:hover { text-decoration: underline; }
+
+/* Enlace activo (sección visible) */
+.toc a.is-active {
+  font-weight: 700;
+  border-left-color: var(--toc-active);
+}
+
+/* Contenido principal */
+#content { min-width: 0; }
+
+/* Responsive: en pantallas pequeñas, la sidebar arriba y colapsable */
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    position: relative;
+    top: auto;
+    max-height: none;
+  }
+  .sidebar-toggle {
+    display: block;
+  }
+  /* por defecto abierta; se cierra con clase .is-collapsed */
+  .sidebar.is-collapsed .toc { display: none; }
+  .sidebar.is-collapsed .sidebar-toggle::after { content: " ▸"; }
+}
+
+.toc ul ul {
+  margin-left: 1em;   /* indentación de sublistas */
+  font-size: 0.9em;   /* un poco más pequeño */
+}
+
+/* ===== Usabilidad general ===== */
+html { scroll-behavior: smooth; }
+
+/* ========== TOPBAR FIJA ========== */
+/* Tokens para la topbar */
+:root{
+  --topbar-bg: rgba(255,255,255,0.85);
+  --topbar-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  --topbar-h: 56px;
+}
+.dark-mode{
+  --topbar-bg: rgba(17,24,39,0.85);
+}
+
+/* Barra fija que aparece al hacer scroll */
+.topbar{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--topbar-h);
+  background: var(--topbar-bg);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--topbar-shadow);
+  backdrop-filter: saturate(180%) blur(8px);
+  -webkit-backdrop-filter: saturate(180%) blur(8px);
+  z-index: 1000;
+
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+.topbar.is-visible{
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Contenido interno alineado */
+.topbar-inner{
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Título en la topbar */
+.topbar-title{
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Botón de tema en la topbar */
+.theme-toggle{
+  margin-left: auto;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  padding: .35rem .6rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.theme-toggle:hover{
+  background: rgba(0,0,0,.04);
+}
+.dark-mode .theme-toggle:hover{
+  background: rgba(255,255,255,.06);
+}
+
+/* Cuando la topbar está visible, empuja la sidebar hacia abajo */
+.has-topbar .sidebar {
+  top: calc(var(--topbar-h) + 1rem);
+}
+
+/* Evita que los títulos queden ocultos al hacer clic en el índice */
+h2, h3 {
+  scroll-margin-top: calc(var(--topbar-h) + 12px);
+}
+
+.topbar {
+  padding-top: env(safe-area-inset-top);
+}
+.topbar-inner {
+  height: calc(var(--topbar-h) - env(safe-area-inset-top));
 }

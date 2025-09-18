@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cascada de energía – con remolinos animados, flechas y controles</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="toolbar" role="region" aria-label="Controles de animación y exportación">
+      <button id="toggleBtn" class="btn" type="button" aria-pressed="false" aria-label="Pausar o reanudar">⏯️ Pausa</button>
+      <div class="range" role="group" aria-label="Velocidad de animación">
+        <label for="speed">Velocidad</label>
+        <input id="speed" type="range" min="0.25" max="2" step="0.05" value="1" aria-valuemin="0.25" aria-valuemax="2" aria-valuenow="1">
+        <span id="speedVal" class="hint">1×</span>
+      </div>
+      <button id="exportSvg" class="btn" type="button">⬇️ Exportar SVG</button>
+      <button id="exportPng" class="btn" type="button">🖼️ Exportar PNG</button>
+      <span class="hint" id="motionHint" aria-live="polite"></span>
+    </div>
+
+    <svg id="cascade" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+      <title id="title">Cascada de energía turbulenta</title>
+      <desc id="desc">Espirales animadas con flechas de inyección y disipación de energía. Incluye controles para pausar, ajustar velocidad y exportar.</desc>
+
+      <!-- Marcadores de punta de flecha -->
+      <defs>
+        <marker id="arrowHead" viewBox="0 0 10 10"
+          refX="0.1" refY="5"
+          markerWidth="9" markerHeight="9"
+          markerUnits="strokeWidth"
+          orient="90">
+          <path d="M0 0 L10 5 L0 10 Z" fill="context-stroke" stroke="none"/>
+        </marker>
+      </defs>
+
+      <!-- Eje vertical -->
+      <g>
+        <line x1="60" y1="60" x2="60" y2="840" stroke="#000" stroke-width="4"/>
+        <path d="M60 40 L50 70 L70 70 Z" fill="#000"/>
+        <text x="40" y="450" writing-mode="vertical-rl" class="t-md">length scale (ℓ)</text>
+      </g>
+
+      <!-- Líneas/etiquetas superior e inferior -->
+      <g>
+        <line x1="80" y1="110" x2="1150" y2="110" class="dashed" stroke="var(--green)" stroke-width="4"/>
+        <text x="600" y="90" text-anchor="middle" class="t-lg green">Integral Scale – Energy Injection</text>
+      </g>
+      <g>
+        <line x1="80" y1="800" x2="1150" y2="800" class="dashed" stroke="var(--red)" stroke-width="4"/>
+        <text x="600" y="830" text-anchor="middle" class="t-lg red">Kolmogorov scale – Energy dissipation</text>
+      </g>
+
+      <!-- Tarjeta "Inertial range" -->
+      <g transform="translate(520,130)" aria-label="Rango inercial – Cascada de energía">
+        <rect width="200" height="65"
+          fill="rgba(128,128,128,0.4)" stroke="#8ecaff" stroke-width="2" rx="10" ry="10"/>
+        <text x="100" y="25" text-anchor="middle" class="t-sm blue-dark">Inertial range –</text>
+        <text x="100" y="47" text-anchor="middle" class="t-sm blue-dark">Energy cascade</text>
+      </g>
+
+      <!-- Capas para remolinos -->
+      <g id="layer-big" aria-hidden="true"></g>
+      <g id="layer-mid" aria-hidden="true"></g>
+      <g id="layer-small" aria-hidden="true"></g>
+      <g id="layer-micro" aria-hidden="true"></g>
+
+      <!-- Capa de flechas -->
+      <g id="layer-arrows" aria-hidden="true"></g>
+    </svg>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

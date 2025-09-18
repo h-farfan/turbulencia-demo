@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="style.css">
 
   <!-- SEO básico -->
-  <meta name="description" content="Qué es la turbulencia atmosférica, por qué ocurre y cómo se percibe.">
   <link rel="canonical" href="https://h-farfan.github.io/turbulencia-demo/">
 
   <!-- Open Graph -->
@@ -24,65 +23,48 @@
   <meta name="twitter:description" content="Qué es la turbulencia atmosférica, por qué ocurre y cómo se percibe.">
   <meta name="twitter:image" content="https://h-farfan.github.io/turbulencia-demo/img/img1.png">
 
-  <script type="module">
+<script type="module">
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
 
-  // Tema claro por defecto
-  mermaid.initialize({
-    startOnLoad: true,
-    theme: "base",
-    fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
-    themeVariables: {
-      primaryColor: "#eef2ff",
-      primaryTextColor: "#111827",
-      primaryBorderColor: "#3730a3",
-
-      lineColor: "#2563eb",
-      textColor: "#111827",
-      secondaryColor: "#e5e7eb",
-      tertiaryColor: "#ffffff",
-
-      nodeBorder: "#c7d2fe",
-      clusterBkg: "#ffffff",
-      clusterBorder: "#e5e7eb",
-
-      edgeLabelBackground: "#ffffff",
-      actorTextColor: "#111827",
-    },
-    themeCSS: `
-      /* Caja general */
-      .label { font-weight: 600; }
-      .node rect, .node circle, .node ellipse {
-        rx: 10; ry: 10;
-        stroke-width: 1.5px;
-        filter: drop-shadow(0 2px 6px rgba(0,0,0,.08));
-      }
-      .node .label { font-size: 13px; }
-
-      /* Flechas y aristas */
-      .edgePaths path {
-        stroke-width: 2px;
-        stroke-linecap: round;
-      }
-      .edgeLabel { font-size: 12px; font-weight: 500; }
-
-      /* Grupos / clusters */
-      .cluster rect {
-        rx: 12; ry: 12;
-        stroke-width: 1.5px;
-        fill: #ffffff;
-      }
-
-      /* Mejor espaciado */
-      :root { --mermaid-nodePadding: 12; }
-      .flowchart-label { padding: 6px 10px; }
-    `
-  });
-
-  // Soporte opcional: si usas .dark-mode en el <body>, re-aplica un tema oscuro
-  const applyDarkTheme = () => {
-    if (!document.body.classList.contains('dark-mode')) return;
-    mermaid.initialize({
+  // Función auxiliar para construir el tema según modo
+  const getThemeConfig = (isDark) => {
+    if (!isDark) {
+      return {
+        startOnLoad: true,
+        theme: "base",
+        fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
+        themeVariables: {
+          primaryColor: "#eef2ff",
+          primaryTextColor: "#111827",
+          primaryBorderColor: "#3730a3",
+          lineColor: "#2563eb",
+          textColor: "#111827",
+          secondaryColor: "#e5e7eb",
+          tertiaryColor: "#ffffff",
+          nodeBorder: "#c7d2fe",
+          clusterBkg: "#ffffff",
+          clusterBorder: "#e5e7eb",
+          edgeLabelBackground: "#ffffff",
+          actorTextColor: "#111827",
+        },
+        themeCSS: `
+          .label { font-weight: 600; }
+          .node rect, .node circle, .node ellipse {
+            rx: 10; ry: 10;
+            stroke-width: 1.5px;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,.08));
+          }
+          .node .label { font-size: 13px; }
+          .edgePaths path { stroke-width: 2px; stroke-linecap: round; }
+          .edgeLabel { font-size: 12px; font-weight: 500; }
+          .cluster rect { rx: 12; ry: 12; stroke-width: 1.5px; fill: #ffffff; }
+          :root { --mermaid-nodePadding: 12; }
+          .flowchart-label { padding: 6px 10px; }
+        `
+      };
+    }
+    // Tema oscuro
+    return {
       startOnLoad: true,
       theme: "base",
       fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
@@ -90,16 +72,13 @@
         primaryColor: "#111827",
         primaryTextColor: "#e5e7eb",
         primaryBorderColor: "#4f46e5",
-
         lineColor: "#93c5fd",
         textColor: "#e5e7eb",
         secondaryColor: "#1f2937",
         tertiaryColor: "#0b1220",
-
         nodeBorder: "#374151",
         clusterBkg: "#0b1220",
         clusterBorder: "#374151",
-
         edgeLabelBackground: "#111827",
         actorTextColor: "#e5e7eb",
       },
@@ -111,34 +90,27 @@
           filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
         }
         .node .label { font-size: 13px; }
-
-        .edgePaths path {
-          stroke-width: 2px;
-          stroke-linecap: round;
-        }
+        .edgePaths path { stroke-width: 2px; stroke-linecap: round; }
         .edgeLabel { font-size: 12px; font-weight: 500; fill: #e5e7eb; }
-
-        .cluster rect {
-          rx: 12; ry: 12;
-          stroke-width: 1.5px;
-        }
-
+        .cluster rect { rx: 12; ry: 12; stroke-width: 1.5px; }
         :root { --mermaid-nodePadding: 12; }
         .flowchart-label { padding: 6px 10px; }
       `
-    });
+    };
   };
 
-  // Aplica el tema oscuro si ya está activo al cargar
-  applyDarkTheme();
+  // 1) Inicialización al cargar, según el estado actual del body
+  const isDark = document.body.classList.contains('dark-mode');
+  mermaid.initialize(getThemeConfig(isDark));
+  mermaid.run({ querySelector: '.mermaid' });
 
-  // Si tu botón de modo oscuro alterna .dark-mode, puedes re-renderizar:
-  document.addEventListener('click', e => {
-    if (e.target.id === 'toggle-dark') {
-      setTimeout(() => location.reload(), 50); // simple y efectivo: recarga para re-render
-    }
-  });
+  // 2) Expone una función global para re-aplicar tema y re-renderizar
+  window.applyMermaidTheme = (dark) => {
+    mermaid.initialize(getThemeConfig(dark));
+    mermaid.run({ querySelector: '.mermaid' });
+  };
 </script>
+
 
 
 </head>
@@ -160,13 +132,20 @@
       <!-- aquí luego puedes agregar más secciones -->
     </nav>
 
-    <p>-.</p>
     <button id="toggle-dark" aria-pressed="false" aria-label="Cambiar modo oscuro">
       🌙 Modo oscuro
     </button>
   </header>
 
-<main>
+  <div class="layout">
+  <aside class="sidebar" role="navigation" aria-label="Índice de la página">
+    <button class="sidebar-toggle" aria-expanded="true" aria-controls="toc-list">Índice ▾</button>
+    <nav id="toc-list" class="toc">
+      <ul></ul> <!-- ← dejar vacío; lo llena el JS -->
+    </nav>
+  </aside>
+
+<main id="content">
   <h2>Introducción</h2>
 
   <figure class="wiki-style">
@@ -237,9 +216,17 @@
   <li>Wyngaard, J. C. (2010). <em>Turbulence in the atmosphere</em>. Cambridge University Press.</li>
 </ul>
 
+  <!-- <h1>Demo Cascada de Richardson</h1> -->
+  <!-- iframe cargando la otra página -->
+  <!-- <iframe src="simulation/cascade/index.html" title="Cascada de Richardson"
+          style="width:50vw; height:80vh; border:none;"></iframe> -->  
+
 
     <a href="K41.html" class="btn-link">Teoría K41</a>
-  </main>
+
+    
+</main>
+</div>
 
   <footer>
     <small>© 2025 Tu Nombre — Página de ejemplo para GitHub Pages</small>
